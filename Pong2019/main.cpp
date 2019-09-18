@@ -1,4 +1,3 @@
-#include "main.h"
 
 #include <iostream>
 #include <list> 
@@ -6,6 +5,10 @@
 #include <chrono>
 #include <ctime>
 #include <SFML/Graphics.hpp>
+
+#include "main.h"
+
+
 //#include "GameObject.h"
 //#include "Scene.h"
 
@@ -20,9 +23,10 @@ using namespace std;
 // 
 
 
-float windowSizeX = 1000, windowSizeY = 1000;
+float windowSizeX = 1000, windowSizeY = 800;
 float paddleOffset = 100;
 float paddleWidth = 10.f, paddleHeight = 200.f;
+float ballRadius = 10.f;
 
 int main()
 {
@@ -42,10 +46,26 @@ int main()
 	shape2.setOrigin(paddleWidth / 2.f, paddleHeight / 2.f);
 	shape2.setPosition(windowSizeX - paddleOffset, windowSizeY / 2.0);
 
-	sf::CircleShape ball(10.f);
+	sf::CircleShape ball(ballRadius);
 	ball.setFillColor(sf::Color::White);
+	ball.setOrigin(ballRadius, ballRadius);
 	ball.setPosition(windowSizeX / 2.0, windowSizeY / 2.0);
-	sf::Vector2f ballVector = sf::Vector2f(0.1, 0);
+	sf::Vector2f ballVector = sf::Vector2f(0.1, -0.2);
+
+
+	sf::Font font;
+	font.loadFromFile("arial.ttf");
+
+	sf::Text p1Score("aojnbsbdfipjanbeof", font);
+	p1Score.setFillColor(sf::Color::Cyan);
+	p1Score.setPosition(100, 100);
+	p1Score.setCharacterSize(30);
+
+	sf::Text p2Score("aojnbsbdfipjanbeof", font);
+	p2Score.setFillColor(sf::Color::Cyan);
+	p2Score.setPosition(700, 100);
+	p2Score.setCharacterSize(30);
+
 
 	float moveSpeed = 2.0;
 
@@ -105,10 +125,24 @@ int main()
 
 		//move the ball & check for scoring
 		ball.move(ballVector);
+		sf::Vector2f ballPos = ball.getPosition();
+		
+		if (ballPos.y <= ballRadius) {		
+			ballVector.y *= -1;
+		}
+		else if (ballPos.y >= (windowSizeY - ballRadius)) {
+			ballVector.y *= -1;
+		}
 
+		if (ballPos.x <= ballRadius) {
+			ballVector.x *= -1;
+		}
+		else if (ballPos.x >= (windowSizeX - ballRadius)) {
+			ballVector.x *= -1;
+		}
 		//check for collisions
 
-
+		
 
 
 		//check for scoring
@@ -118,15 +152,11 @@ int main()
 		window.draw(shape1);
 		window.draw(shape2);
 		window.draw(ball);
+		window.draw(p1Score);
+		window.draw(p2Score);
 		window.display();
 	}
 
 	return 0;
 }
 
-bool CollisionCheck(sf::CircleShape ball, sf::RectangleShape paddle) {
-	sf::Vector2f ballPosition = ball.getPosition();
-	sf::Vector2f playerPosition = paddle.getPosition();
-
-	return false;
-}
