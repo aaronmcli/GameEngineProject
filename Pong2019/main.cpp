@@ -46,12 +46,14 @@ int main()
 	shape2.setOrigin(paddleWidth / 2.f, paddleHeight / 2.f);
 	shape2.setPosition(windowSizeX - paddleOffset, windowSizeY / 2.0);
 
-	sf::CircleShape ball(ballRadius);
+	/*sf::CircleShape ball(ballRadius);
 	ball.setFillColor(sf::Color::White);
 	ball.setOrigin(ballRadius, ballRadius);
 	ball.setPosition(windowSizeX / 2.0, windowSizeY / 2.0);
 	sf::Vector2f ballVector = sf::Vector2f(0.1, -0.2);
+*/
 
+	PongBall ball;
 
 	sf::Font font;
 	font.loadFromFile("arial.ttf");
@@ -124,22 +126,24 @@ int main()
 		}
 
 		//move the ball & check for scoring
-		ball.move(ballVector);
+		ball.Update();
+
 		sf::Vector2f ballPos = ball.getPosition();
 		
 		if (ballPos.y <= ballRadius) {		
-			ballVector.y *= -1;
+			ball.ballVector.y *= -1;
 		}
 		else if (ballPos.y >= (windowSizeY - ballRadius)) {
-			ballVector.y *= -1;
+			ball.ballVector.y *= -1;
 		}
 
-		if (ballPos.x <= ballRadius) {
-			ballVector.x *= -1;
+		if (CollisionCheck(ball,shape1)) {
+			ball.ballVector.x *= -1;
 		}
-		else if (ballPos.x >= (windowSizeX - ballRadius)) {
-			ballVector.x *= -1;
+		else if (CollisionCheck(ball, shape2)) {
+			ball.ballVector.x *= -1;
 		}
+
 		//check for collisions
 
 		sf::Vector2f p1Pos = shape1.getPosition();
@@ -150,6 +154,18 @@ int main()
 
 		//check for scoring
 
+
+
+		
+		if (ballPos.x <= ballRadius) {
+			ball.setPosition(windowSizeX / 2.0, windowSizeY / 2.0);
+			//p2 scored
+		}
+		else if (ballPos.x >= (windowSizeX - ballRadius)) {
+			ball.setPosition(windowSizeX / 2.0, windowSizeY / 2.0);
+			//p1 scored
+		}
+		
 
 		window.clear();
 		window.draw(shape1);
