@@ -142,8 +142,11 @@ int main()
 		}
 		//check for collisions
 
-		
+		sf::Vector2f p1Pos = shape1.getPosition();
+		sf::Vector2f p2Pos = shape2.getPosition();
 
+		shape1.setPosition(p1Pos.x, ballPos.y);
+		shape2.setPosition(p2Pos.x, ballPos.y);
 
 		//check for scoring
 
