@@ -7,7 +7,8 @@
 #include <SFML/Graphics.hpp>
 
 #include "main.h"
-
+#include "GameEngine.h"
+#include "InputProcessor.h"
 
 //#include "GameObject.h"
 //#include "Scene.h"
@@ -22,6 +23,16 @@ using namespace std;
 // FPS control
 // 
 
+// TO DO LIST:
+
+//
+//
+//
+//
+//
+//
+//
+//
 
 float windowSizeX = 1000, windowSizeY = 800;
 float paddleOffset = 100;
@@ -30,6 +41,11 @@ float ballRadius = 10.f;
 
 int main()
 {
+
+	//singletons
+	
+	GameEngine* gameEngine = GameEngine::Instance();
+    InputProcessor* inputProcess = InputProcessor::Instance();
 
 	//std::cout << "Hello World!\n";
 	sf::RenderWindow window(sf::VideoMode(windowSizeX, windowSizeY), "SFML works!");
@@ -58,16 +74,22 @@ int main()
 	sf::Font font;
 	font.loadFromFile("arial.ttf");
 
-	sf::Text p1Score("aojnbsbdfipjanbeof", font);
+	int p1ScoreValue = 1;
+	int p2ScoreValue = 0;
+
+	string p1ScoreString = "Score: " + p1ScoreValue;
+
+	sf::Text p1Score(p1ScoreString, font);
 	p1Score.setFillColor(sf::Color::Cyan);
 	p1Score.setPosition(100, 100);
 	p1Score.setCharacterSize(30);
 
-	sf::Text p2Score("aojnbsbdfipjanbeof", font);
+	sf::Text p2Score("Score:" + p2ScoreValue, font);
 	p2Score.setFillColor(sf::Color::Cyan);
 	p2Score.setPosition(700, 100);
 	p2Score.setCharacterSize(30);
 
+	
 
 	float moveSpeed = 2.0;
 
