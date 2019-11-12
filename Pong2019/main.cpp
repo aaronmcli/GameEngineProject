@@ -105,39 +105,42 @@ int main()
 		std::time_t t = std::time(0);
 
 		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed) {
-				window.close();
-			}
 
-			//polling for inputs
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				// move left...
-				p1Left = true;
+#pragma region inputs
 
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			{
-				// move right...
-				p1Right = true;
-			}
+		//while (window.pollEvent(event))
+		//{
+		//	if (event.type == sf::Event::Closed) {
+		//		window.close();
+		//	}
 
-			//polling for inputs
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-			{
-				// move left...
-				p2Left = true;
+		//	//polling for inputs
+		//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		//	{
+		//		// move left...
+		//		p1Left = true;
 
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-			{
-				// move right...
-				p2Right = true;
-			}
+		//	}
+		//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		//	{
+		//		// move right...
+		//		p1Right = true;
+		//	}
 
-		}
+		//	//polling for inputs
+		//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		//	{
+		//		// move left...
+		//		p2Left = true;
+
+		//	}
+		//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		//	{
+		//		// move right...
+		//		p2Right = true;
+		//	}
+		//}
+#pragma endregion Input processing and key mapping
 
 		//move the paddles
 		if (p1Right ^ p1Left) { //xor			

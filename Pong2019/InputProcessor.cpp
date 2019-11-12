@@ -1,5 +1,5 @@
 #include "InputProcessor.h"
-
+#include "KeyMapper.h"
 
 //CPP contains the Constructors and the member functions.. Data definations should go into the header file
 
@@ -19,10 +19,28 @@ InputProcessor* InputProcessor::Instance()
     return m_pInstance;
 }
 
-void InputProcessor::Update() 
+void InputProcessor::Update(sf::RenderWindow* window)
 {
-    //sf::Event event;
-    //InputProcessor::Instance().window.pollEvent(event);
-
+    sf::Event event;
+    while (window->pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            window->close();
+        }
+        //polling for inputs
+        //run through all the keymappings
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+        {
+            // move left...
+            //p1Left = true;
+        }
+    }
+    return;
 }
 
+//bool InputProcessor::isKeyPressed(GameplayInputs key)
+//{
+//
+//    return false;
+//}

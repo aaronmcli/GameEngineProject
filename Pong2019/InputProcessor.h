@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 #include <iostream>
-
+#include "KeyMapper.h"
 
 class InputProcessor
 {
@@ -17,7 +17,7 @@ private:
 	InputProcessor& operator=(InputProcessor const&) {}; //assignment operator is private
 	static InputProcessor* m_pInstance;
 
-    void Update();
-
+    void Update(sf::RenderWindow* window);
+    //bool isKeyPressed(GameplayInputs key);
 };
 

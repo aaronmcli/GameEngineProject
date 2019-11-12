@@ -2,6 +2,7 @@
 #include "InputProcessor.h"
 
 //associative array
+
 enum GameplayInputs
 {
     P1Up,
@@ -14,11 +15,11 @@ enum GameplayInputs
 class KeyMapper
 {
 public:
-    
+
     static KeyMapper* Instance();
     static std::map<GameplayInputs, sf::Keyboard::Key> mappingData;
     //static GameplayInputs getInput();
-
+    void Init();
 
 
 
